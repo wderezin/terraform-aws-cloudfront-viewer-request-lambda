@@ -4,6 +4,9 @@ exports.handler = async (event, context) => {
   const request = event.Records[0].cf.request;
   let host = request.headers.host[0].value
 
+  let apex_redirect = true
+  let index_rewrite = true
+
   const apex_redirect_body = `
 <\!DOCTYPE html>
 <html lang="en">
@@ -15,7 +18,7 @@ exports.handler = async (event, context) => {
 </html>
 `;
 
-  if ( process.env.APEX_REDIRECT == "true" ) {
+  if ( apex_redirect ) {
     if (host.split('.').length == 2) {
       return {
         status: '301',
@@ -31,7 +34,7 @@ exports.handler = async (event, context) => {
     }
   }
 
-  if ( process.env.INDEX_REWRITE == "true") {
+  if ( index_rewrite ) {
     // Extract the URI from the request
     var olduri = request.uri;
 
