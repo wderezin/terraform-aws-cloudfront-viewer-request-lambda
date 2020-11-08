@@ -16,8 +16,10 @@ resource aws_lambda_function lambda {
   timeout       = 5
 
   environment {
-    APEX_REDIRECT = local.apex_domain_redirect
-    INDEX_REWRITE = local.index_rewrite
+    variables = {
+      APEX_REDIRECT = local.apex_domain_redirect
+      INDEX_REWRITE = local.index_rewrite
+    }
   }
 
   filename         = data.archive_file.lambdazip.output_path
