@@ -45,7 +45,7 @@ exports.handler = async (event, context) => {
     }
   }
 
-  if ( config.ghost_hostname.length > 0 &&  request.uri.startsWith("ghost") ) {
+  if ( config.ghost_hostname.length > 0 && (request.uri.startsWith("/ghost/") || request.uri == "/ghost" )) {
     return {
       status: '307',
       statusDescription: `Redirecting domain`,
