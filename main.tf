@@ -1,11 +1,7 @@
 
 
 resource local_file config {
-  content     = "{
-"apex_redirect" : ${local.a},
-"index_rewrite": true,
-"cms_host" : "ghost.bandc.club"
-}"
+  content     = local.config_json
   filename = "${path.module}/lambda/config.json"
 }
 
