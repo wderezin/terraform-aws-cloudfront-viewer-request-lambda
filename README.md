@@ -1,4 +1,4 @@
-# Terraform AWS Cloudfront Domain Redirect
+# Terraform AWS Cloudfront Viewer Request Lambda
 
 A [Daring Way](https://www/daringway.com/)  cloudfront edge lambda
 
@@ -7,14 +7,19 @@ A [Daring Way](https://www/daringway.com/)  cloudfront edge lambda
     Contestant: What is the Daring Way AWS Cloudfront Viewer Request Lambda Terraform Module.
     Alex: That is correct.
     
+Lambda Supports:
+- Redirect apex domain such as (daringway.com -> www.daringway.com)
+- Rewrite uri for S3 such as (www.daringway.com/ -> www.daringway.com/index.html)
+- Redirect for ghost server management such as (www.daringway.com/ghost -> ghost.daringway.com/ghost)
+    
 # Usage
 
 ```hcl
 module cloudfront_lambda {
-  source = "daringway/cloudfront-index_rewrite/aws"
+  source = "daringway/cloudfront-viewer-request-lambda/aws"
   tags   = {}
   apex_domain_redirect = true
-  index_rewrite = true
+  index_rewrite        = true
 }
 
 resource aws_cloudfront_distribution a_distribution {
