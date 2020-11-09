@@ -45,10 +45,7 @@ exports.handler = async (event, context) => {
     }
   }
 
-  // Extract the URI from the request
-  var olduri = request.uri;
-
-  if ( config.ghost_hostname.length > 0 &&  oldurl.startsWith("ghost") ) {
+  if ( config.ghost_hostname.length > 0 &&  request.uri.startsWith("ghost") ) {
     return {
       status: '307',
       statusDescription: `Redirecting domain`,
@@ -63,6 +60,9 @@ exports.handler = async (event, context) => {
   }
 
   if ( config.index_rewrite ) {
+
+    // Extract the URI from the request
+    var olduri = request.uri;
 
     // Match any '/' that occurs at the end of a URI. Replace it with a default index
     var newuri = olduri.replace(/\/$/, '\/index.html');
