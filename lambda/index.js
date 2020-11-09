@@ -52,7 +52,7 @@ exports.handler = async (event, context) => {
       headers: {
         location: [{
           key: 'Location',
-          value: `https://www.${config.ghost_hostname}${request.uri}`
+          value: `https://${config.ghost_hostname}${request.uri}`
         }]
       },
       body: temp_redirect_body
