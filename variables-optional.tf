@@ -16,3 +16,9 @@ variable index_rewrite {
   default     = false
   description = "Rewrite a directory request to /index.html"
 }
+
+variable ghost_hostname {
+  type = string
+  default = ""
+  description = "Hostname of the ghost CMS server"
+}

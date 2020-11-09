@@ -1,5 +1,16 @@
 
+
+resource local_file config {
+  content     = "{
+"apex_redirect" : ${local.a},
+"index_rewrite": true,
+"cms_host" : "ghost.bandc.club"
+}"
+  filename = "${path.module}/lambda/config.json"
+}
+
 data archive_file lambdazip {
+  depends_on = [ local_file.config ]
   type        = "zip"
   output_path = "${path.module}/lambda_function.zip"
   source_dir  = "${path.module}/lambda"
