@@ -18,7 +18,7 @@ variable index_rewrite {
 }
 
 variable ghost_hostname {
-  type = string
-  default = ""
+  type        = string
+  default     = ""
   description = "Hostname of the ghost CMS server"
 }
