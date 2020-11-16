@@ -45,6 +45,36 @@ exports.handler = async (event, context) => {
     }
   }
 
+  if ( config.append_slash ) {
+    var olduri = request.uri;
+    // Match any uri that ends with some combination of
+    // [0-9][a-z][A-Z]_- and append a slash
+    var endslashuri = olduri.replace(/(\/[\w\-]+)$/, '$1/');
+    if(endslashuri != olduri) {
+      // If we changed the uri, 301 to the version with a slash, appending querystring
+      var params = '';
+      if(('querystring' in request) && (request.querystring.length>0)) {
+        params = '?'+request.querystring;
+      }
+      var newuri = endslashuri + params;
+
+      //console.log("Params: " + params);
+      //console.log("New URI: " + newuri);
+
+      const response = {
+        status: '301',
+        statusDescription: 'Permanently moved',
+        headers: {
+          location: [{
+            key: 'Location',
+            value: newuri
+          }]
+        }
+      };
+      return response;
+    }
+  }
+
   if (config.ghost_hostname.length > 0 &&
     ((request.uri.startsWith("/ghost/")
       || request.uri == "/ghost"

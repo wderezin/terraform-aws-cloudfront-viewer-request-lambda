@@ -11,6 +11,12 @@ variable apex_domain_redirect {
   description = "Redirect an apex request to www (daringway.com -> www.daringway.com)"
 }
 
+variable append_slash {
+  type        = bool
+  default     = false
+  description = "Append the slash and redirect"
+}
+
 variable index_rewrite {
   type        = bool
   default     = false
