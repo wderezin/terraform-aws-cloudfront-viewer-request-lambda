@@ -75,10 +75,10 @@ exports.handler = async (event, context) => {
     }
   }
 
+  // only need to check for trailing / as the directory checker above will add when needed.
   if (config.ghost_hostname.length > 0 &&
     ((request.uri.startsWith("/ghost/")
-      || request.uri == "/ghost"
-      || request.uri.endsWith("/edit")))) {
+      || request.uri.endsWith("/edit/")))) {
 
     return {
       status: '307',
