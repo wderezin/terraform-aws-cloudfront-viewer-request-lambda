@@ -2,6 +2,13 @@
 
 const config = require('./config.json')
 
+function isTrue(value) {
+  if ( typeof value === 'boolean') {
+    return value;
+  }
+  return value == 'true';
+}
+
 exports.handler = async (event, context) => {
   // Extract the request from the CloudFront event that is sent to Lambda@Edge
   const request = event.Records[0].cf.request;
@@ -29,7 +36,7 @@ exports.handler = async (event, context) => {
 </html>
 `;
 
-  if ( config.apex_redirect ) {
+  if ( isTrue(config.apex_redirect) ) {
     if (host.split('.').length == 2) {
       return {
         status: '301',
@@ -45,7 +52,7 @@ exports.handler = async (event, context) => {
     }
   }
 
-  if ( config.append_slash ) {
+  if ( isTrue(config.append_slash) ) {
     var olduri = request.uri;
     // Match any uri that ends with some combination of
     // [0-9][a-z][A-Z]_- and append a slash
@@ -93,7 +100,7 @@ exports.handler = async (event, context) => {
     };
   }
 
-  if ( config.index_rewrite ) {
+  if ( isTrue(config.index_rewrite) ) {
 
     // Extract the URI from the request
     var olduri = request.uri;

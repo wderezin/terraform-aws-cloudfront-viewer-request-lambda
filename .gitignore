@@ -1,5 +1,9 @@
 # Version Date 2017-01-16
 
+# Dynamically generated during deploy
+lambda/config.json
+
+
 # Local
 build
 dist
