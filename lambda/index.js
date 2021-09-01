@@ -74,7 +74,7 @@ exports.handler = async (event, context) => {
         headers: {
           location: [{
             key: 'Location',
-            value: `//${host}{newuri}`
+            value: `//${host}${newuri}`
           }]
         }
       };
