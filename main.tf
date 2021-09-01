@@ -23,5 +23,5 @@ resource aws_lambda_function lambda {
   timeout       = 5
 
   filename         = data.archive_file.lambdazip.output_path
-  source_code_hash = data.archive_file.lambdazip.output_base64sha256
+  source_code_hash = filebase64sha256("${path.module}/lambda/index.js")
 }
